@@ -157,6 +157,34 @@ public class hillCipherController implements Initializable {
             }
         }
     }
+    public double determinant(double[][] a) {
+        double det = 0, sign = 1, p = 0, q = 0;
+        int n = a.length;
+        if (n == 1) {
+            det = a[0][0];
+        } else {
+            double[][] b = new double[n - 1][n - 1];
+            for (int x = 0; x < n; x++) {
+                p = 0;
+                q = 0;
+                for (int i = 1; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (j != x) {
+                            b[(int) p][(int) q++] = a[i][j];
+                            if (q % (n - 1) == 0) {
+                                p++;
+                                q = 0;
+                            }
+                        }
+                    }
+                }
+                det = det + a[0][x] * determinant(b) * sign;
+                sign = -sign;
+            }
+        }
+        return det % 26; // determinant between 1-25
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Set the items of the inputTxt_ComboBox ComboBox
