@@ -184,6 +184,49 @@ public class hillCipherController implements Initializable {
         }
         return det % 26; // determinant between 1-25
     }
+    void hillCipher(String message, String key, boolean mode) //false is encrypt, true is decrypt
+    {
+        int size = getMatrixSize();
+        // Get key matrix from the key string
+        double [][]keyMatrix = new double[size][size];
+        getKeyMatrix(key, keyMatrix);
+        if(message.length() % size != 0) {
+            int padSize = size - (message.length() % size);
+            for (int i = 0; i < padSize; i++) {
+                message += 'X';
+            }
+        }
+        String finalCipher = "";
+        for(int i = 0; i < message.length(); i += size) { // needs padding
+            String blockMsg = "";
+            String temp = message;
+            double [][]messageVector = new double[size][1];
+            blockMsg = temp.substring(i, i + size);
+            for (int n = 0; n < size; n++)
+                messageVector[n][0] = (blockMsg.charAt(n)) % 65;
+            double [][]cipherMatrix = new double[size][1];
+            // Following function generates
+            // the encrypted vector
+            if(mode == true) { // decrypt
+                if(size == 1) {
+                    double[][] v = new double[size][size];
+                    v[0][0] = findInverseMod26(keyMatrix[0][0]);
+                    hillVector(cipherMatrix, v, messageVector);
+                } else {
+                    hillVector(cipherMatrix, inverseMatrix(keyMatrix), messageVector);
+                }
+            } else {
+                hillVector(cipherMatrix, keyMatrix, messageVector);
+            }
+            String cipherText = "";
+            for (int n = 0; n < size; n++)
+                cipherText += (char)(cipherMatrix[n][0] + 65);
+            finalCipher += cipherText;
+        }
+        // Finally print the ciphertext
+        System.out.println("ciphertext:" + finalCipher);
+        cipherTxt.setText(finalCipher);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
