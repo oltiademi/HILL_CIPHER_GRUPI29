@@ -75,6 +75,69 @@ public class hillCipherController implements Initializable {
         }
         keyTxt.setText(key);
     }
+    double findInverseMod26(double b) {
+        for (int i = 1; i < 26; i++) {
+            if ((b * i) % 26 == 1) {
+                return i;
+            }
+        }
+        throw new IllegalArgumentException("The inverse modulo does not exist.");
+    }
+    double[][] adjoint(double[][] matrix) {
+        int size = getMatrixSize();
+        double[][] adjointMatrix = new double[size][size];
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                int sign = ((i + j) % 2 == 0) ? 1 : -1;
+                double[][] minor = minorMatrix(matrix, i, j);
+                adjointMatrix[j][i] = Math.floorMod((int) (sign * determinant(minor)), 26);
+            }
+        }
+        System.out.println("adj: ");
+        printMatrix(adjointMatrix);
+        return adjointMatrix;
+    }
+    double[][] minorMatrix(double[][] matrix, int row, int col) {
+        int n = matrix.length;
+        double[][] minor = new double[n - 1][n - 1];
+        int p = 0, q = 0;
+        for (int i = 0; i < n; i++) {
+            if (i != row) {
+                for (int j = 0; j < n; j++) {
+                    if (j != col) {
+                        minor[p][q++] = matrix[i][j];
+                    }
+                }
+                p++;
+                q = 0;
+            }
+        }
+        return minor;
+    }
+    double[][] inverseMatrix(double[][] matrix) {
+        int size = getMatrixSize();
+        double[][] inverse = new double[size][size];
+        double det = determinant(matrix);
+        double inverseDet = findInverseMod26(det);
+        double[][] adj = adjoint(matrix);
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                inverse[i][j] = Math.floorMod((int) (adj[i][j] * inverseDet), 26);
+            }
+        }
+        System.out.println("Inverse: ");
+        printMatrix(inverse);
+        return inverse;
+    }
+    public static void printMatrix(double[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Set the items of the inputTxt_ComboBox ComboBox
