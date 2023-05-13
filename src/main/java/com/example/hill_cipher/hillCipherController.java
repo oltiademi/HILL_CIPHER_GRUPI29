@@ -242,6 +242,21 @@ public class hillCipherController implements Initializable {
             hillCipher(msg, key, false);
         }
     }
+    @FXML
+    void Decrypt(ActionEvent event) {
+        String msg = plainTxt.getText();
+        int size = getMatrixSize();
+        String key = keyTxt.getText();
+        if (key.length() != size * size) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("This is an alert!");
+            alert.setContentText("Qelesi duhet te jete" + size * size + " karaktere!!");
+            alert.showAndWait();
+        } else { // vazhdon
+            hillCipher(msg, key, true);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
