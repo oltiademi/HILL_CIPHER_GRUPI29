@@ -138,6 +138,25 @@ public class hillCipherController implements Initializable {
             System.out.println();
         }
     }
+    void hillVector(double[][] cipherMatrix,
+                    double[][] keyMatrix,
+                    double[][] messageVector) {
+        int size = getMatrixSize();
+        int x, i, j;
+        for (i = 0; i < size; i++)
+        {
+            for (j = 0; j < 1; j++)
+            {
+                cipherMatrix[i][j] = 0;
+                for (x = 0; x < size; x++)
+                {
+                    cipherMatrix[i][j] +=
+                            keyMatrix[i][x] * messageVector[x][j];
+                }
+                cipherMatrix[i][j] = Math.floorMod((int)cipherMatrix[i][j], 26);
+            }
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Set the items of the inputTxt_ComboBox ComboBox
