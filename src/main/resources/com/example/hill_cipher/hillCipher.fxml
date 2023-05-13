@@ -8,38 +8,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hill_cipher.hillCipherController">
+<AnchorPane prefHeight="600.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hill_cipher.hillCipherController">
    <children>
-      <Label layoutX="40.0" layoutY="58.0" prefHeight="25.0" prefWidth="81.0" style="-fx-font-weight: bold;" text="Text Input:">
+      <Label layoutX="518.0" layoutY="40.0" prefHeight="25.0" prefWidth="81.0" style="-fx-font-weight: bold;" text="Text Input:">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="677.0" layoutY="57.0" prefHeight="26.0" prefWidth="105.0" style="-fx-font-weight: bold;" text="Text Output:">
+      <Label layoutX="505.0" layoutY="375.0" prefHeight="26.0" prefWidth="105.0" style="-fx-font-weight: bold;" text="Text Output:">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="encryptBtn" layoutX="512.0" layoutY="355.0" mnemonicParsing="false" onAction="#EncryptText" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-cursor: hand;" text="Encrypt">
+      <Button fx:id="encryptBtn" layoutX="413.0" layoutY="279.0" mnemonicParsing="false" onAction="#Encrypt" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-cursor: hand;" text="Encrypt">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="decryptBtn" layoutX="642.0" layoutY="355.0" mnemonicParsing="false" onAction="#Decrypt" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: green; -fx-text-fill: white; -fx-cursor: hand;" text="Decrypt">
+      <Button fx:id="decryptBtn" layoutX="610.0" layoutY="279.0" mnemonicParsing="false" onAction="#Decrypt" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: green; -fx-text-fill: white; -fx-cursor: hand;" text="Decrypt">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="506.0" layoutY="304.0" style="-fx-font-weight: bold;" text="Key: ">
+      <Label layoutX="758.0" layoutY="75.0" style="-fx-font-weight: bold;" text="Key: ">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="keyTxt" layoutX="551.0" layoutY="300.0" />
-      <TextArea fx:id="plainTxt" layoutX="131.0" layoutY="57.0" prefColumnCount="356" prefHeight="135.0" prefRowCount="135" prefWidth="289.0" wrapText="true" />
-      <TextArea fx:id="cipherTxt" layoutX="792.0" layoutY="57.0" prefHeight="135.0" prefWidth="289.0" wrapText="true" />
-      <ComboBox fx:id="inpuTxt_ComboBox" layoutX="433.0" layoutY="57.0" prefWidth="150.0" />
-      <ComboBox fx:id="output_ComboBox" layoutX="1093.0" layoutY="57.0" prefWidth="150.0" />
-      <Button fx:id="generateBtn" layoutX="709.0" layoutY="300.0" mnemonicParsing="false" onAction="#randomizeKey" text="Generate" />
+      <TextField fx:id="keyTxt" layoutX="794.0" layoutY="71.0" />
+      <TextArea fx:id="plainTxt" layoutX="414.0" layoutY="72.0" prefColumnCount="356" prefHeight="135.0" prefRowCount="135" prefWidth="289.0" wrapText="true" />
+      <TextArea fx:id="cipherTxt" layoutX="414.0" layoutY="403.0" prefHeight="135.0" prefWidth="289.0" wrapText="true" />
+      <ComboBox fx:id="inpuTxt_ComboBox" layoutX="214.0" layoutY="71.0" prefWidth="150.0" />
+      <Label layoutX="126.0" layoutY="75.0" style="-fx-font-weight: bold;" text="Matrix Size: ">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="793.0" layoutY="108.0" mnemonicParsing="false" onAction="#generateKey" prefHeight="25.0" prefWidth="149.0" text="Generate Key">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
